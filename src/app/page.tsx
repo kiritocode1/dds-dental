@@ -48,6 +48,27 @@ const services = [
   },
 ];
 
+const careNotes = [
+  {
+    src: "/doctor/brushing-explaination.mp4",
+    title: "How to brush, properly.",
+    caption:
+      "A short demonstration of the angle, the pressure and the order most people get wrong.",
+  },
+  {
+    src: "/doctor/rinsing-teeth-crevies.mp4",
+    title: "Rinsing the places brushing misses.",
+    caption:
+      "What to do after eating, when a brush isn’t to hand, to keep the crevices clean.",
+  },
+  {
+    src: "/doctor/doctor-recommendations.mp4",
+    title: "A few small recommendations.",
+    caption:
+      "Habits Dr. Munde mentions to most patients, the ones that actually matter.",
+  },
+];
+
 const galleryImages = [
   { src: "/doctor/gallery-2.jpeg", alt: "Dental treatment room interior at Dentsspa Dental Studio", span: "tall" },
   { src: "/doctor/gallery-3.jpeg", alt: "Patient consultation with Dr. Priti Munde", span: "wide" },
@@ -116,6 +137,7 @@ export default function Home() {
         <Hero />
         <Intro />
         <Doctor />
+        <CareNotes />
         <Services />
         <Gallery />
         <Awards />
@@ -339,6 +361,64 @@ function Detail({ label, value }: { label: string; value: string }) {
       </dt>
       <dd className="mt-1.5 text-foreground">{value}</dd>
     </div>
+  );
+}
+
+function CareNotes() {
+  return (
+    <section
+      aria-labelledby="care-title"
+      className="border-t border-border/70 bg-secondary/40"
+    >
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4 reveal-quick">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              Notes from the chair
+            </p>
+            <h2
+              id="care-title"
+              className="mt-5 font-heading text-3xl leading-tight tracking-tight sm:text-[44px]"
+            >
+              A few short videos, from the doctor.
+            </h2>
+            <p className="editorial-measure mt-6 text-pretty text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+              Small bits of practical advice Dr. Munde records for patients,
+              the kind of thing she would otherwise repeat at every
+              appointment.
+            </p>
+          </div>
+
+          <div className="grid gap-8 sm:gap-10 lg:col-span-8 lg:grid-cols-3">
+            {careNotes.map((v, i) => (
+              <figure
+                key={v.src}
+                className="reveal-quick"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-foreground/5">
+                  <video
+                    src={v.src}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+                <figcaption className="mt-4">
+                  <h3 className="font-heading text-lg leading-snug tracking-tight">
+                    {v.title}
+                  </h3>
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-muted-foreground">
+                    {v.caption}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

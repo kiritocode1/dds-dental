@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+
+const SITE_URL = "https://dentsspa.in";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,8 +18,19 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT"],
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF8F4" },
+    { media: "(prefers-color-scheme: dark)", color: "#FAF8F4" },
+  ],
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dentsspa.in"),
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Dentsspa Dental Studio",
   title: {
     default:
       "Dentsspa Dental Studio — Dr. Priti Munde, BDS · Shivaji Nagar, Pune",
@@ -32,31 +45,69 @@ export const metadata: Metadata = {
     "dental implants Pune",
     "Dr Priti Munde",
     "Dentsspa",
+    "Dentsspa Dental Studio",
     "Model Colony dentist",
     "smile design Pune",
     "Invisalign Pune",
+    "dental veneers Pune",
+    "best dentist near Shivaji Nagar",
   ],
-  authors: [{ name: "Dentsspa Dental Studio" }],
-  alternates: { canonical: "/" },
+  authors: [{ name: "Dr. Priti Munde", url: SITE_URL }],
+  creator: "Dentsspa Dental Studio",
+  publisher: "Dentsspa Dental Studio",
+  category: "health",
+  alternates: {
+    canonical: "/",
+    languages: { "en-IN": "/", "x-default": "/" },
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "/",
+    url: SITE_URL,
     siteName: "Dentsspa Dental Studio",
     title: "Dentsspa Dental Studio — Shivaji Nagar, Pune",
     description:
       "Dental clinic in Model Colony, Shivaji Nagar, Pune. Led by Dr. Priti Munde, BDS. Established 2011.",
-    images: [{ url: "/Logo.png", width: 800, height: 200, alt: "Dentsspa Dental Studio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dentsspa Dental Studio — Shivaji Nagar, Pune",
     description:
       "Dental clinic in Model Colony, Shivaji Nagar, Pune. Led by Dr. Priti Munde, BDS.",
-    images: ["/Logo.png"],
   },
-  icons: { icon: "/favicon.ico" },
-  robots: { index: true, follow: true },
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/Logo.png" }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Dentsspa",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  referrer: "origin-when-cross-origin",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  manifest: "/manifest.webmanifest",
+  other: {
+    "geo.region": "IN-MH",
+    "geo.placename": "Pune",
+    "geo.position": "18.5345;73.8389",
+    ICBM: "18.5345, 73.8389",
+  },
 };
 
 export default function RootLayout({
@@ -66,7 +117,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={cn(
         "h-full antialiased",
         inter.variable,

@@ -78,32 +78,83 @@ const galleryImages = [
   { src: "/doctor/gallery-6.jpeg", alt: "Doctor and team at Dentsspa Dental Studio", span: "wide" },
 ];
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Dentist",
-  name: "Dentsspa Dental Studio",
+const SITE_URL = "https://dentsspa.in";
+
+const doctorPerson = {
+  "@type": "Person",
+  "@id": `${SITE_URL}/#dr-priti-munde`,
+  name: "Dr. Priti Munde",
+  honorificPrefix: "Dr.",
+  jobTitle: "Cosmetic Dentist & Implantologist",
   description:
-    "Dental clinic in Model Colony, Shivaji Nagar, Pune, led by Dr. Priti Munde. Established 2011.",
-  url: "https://dentsspa.in",
-  telephone: "+91 96730 04407",
-  email: EMAIL,
-  image: "https://dentsspa.in/Logo.png",
-  priceRange: "₹₹",
-  founder: {
-    "@type": "Person",
-    name: "Dr. Priti Munde",
-    jobTitle: "Cosmetic Dentist & Implantologist",
+    "Founder & Director of Dentsspa Dental Studio, Pune. Cosmetic dentist and implantologist with 17 years of practice; patients from 28 countries.",
+  image: `${SITE_URL}/doctor/1.jpeg`,
+  url: SITE_URL,
+  worksFor: { "@id": `${SITE_URL}/#clinic` },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Maharashtra University of Health Sciences",
   },
+  hasCredential: [
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "degree",
+      name: "BDS",
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Maharashtra University of Health Sciences",
+      },
+      identifier: "A-17135",
+    },
+  ],
+  knowsAbout: [
+    "Cosmetic Dentistry",
+    "Dental Implants",
+    "Digital Smile Design",
+    "Endodontics",
+    "Prosthodontics",
+    "Invisalign",
+  ],
+  sameAs: ["https://www.facebook.com/DentsspaFirstDentalSpa"],
+};
+
+const clinicEntity = {
+  "@type": ["Dentist", "MedicalBusiness", "LocalBusiness"],
+  "@id": `${SITE_URL}/#clinic`,
+  name: "Dentsspa Dental Studio",
+  alternateName: "First Dental Spa Clinic",
+  slogan: "First Dental Spa Clinic",
+  description:
+    "Dental clinic in Model Colony, Shivaji Nagar, Pune, led by Dr. Priti Munde, BDS. Cosmetic dentistry, implants, digital smile design and general dental care since 2011.",
+  url: SITE_URL,
+  logo: `${SITE_URL}/Logo.png`,
+  image: [
+    `${SITE_URL}/doctor/1.jpeg`,
+    `${SITE_URL}/doctor/17.jpeg`,
+    `${SITE_URL}/doctor/gallery-2.jpeg`,
+    `${SITE_URL}/doctor/gallery-3.jpeg`,
+  ],
+  telephone: "+919673004407",
+  email: EMAIL,
+  priceRange: "₹₹",
+  currenciesAccepted: "INR",
+  paymentAccepted: "Cash, Credit Card, Debit Card, UPI",
+  foundingDate: "2011",
+  founder: doctorPerson,
+  employee: doctorPerson,
   address: {
     "@type": "PostalAddress",
     streetAddress: "401, Eden Hall, Model Colony",
-    addressLocality: "Shivaji Nagar, Pune",
+    addressLocality: "Shivaji Nagar",
     addressRegion: "Maharashtra",
     postalCode: "411016",
     addressCountry: "IN",
   },
   geo: { "@type": "GeoCoordinates", latitude: 18.5345, longitude: 73.8389 },
-  areaServed: { "@type": "City", name: "Pune" },
+  areaServed: [
+    { "@type": "City", name: "Pune" },
+    { "@type": "AdministrativeArea", name: "Maharashtra" },
+  ],
   hasMap: MAPS_HREF,
   openingHoursSpecification: [
     {
@@ -120,7 +171,50 @@ const jsonLd = {
       closes: "20:00",
     },
   ],
+  medicalSpecialty: [
+    "CosmeticDentistry",
+    "Endodontic",
+    "Prosthodontics",
+    "OralAndMaxillofacialSurgery",
+  ],
+  availableService: [
+    { "@type": "MedicalProcedure", name: "General Dentistry" },
+    { "@type": "MedicalProcedure", name: "Dental Aesthetics & Veneers" },
+    { "@type": "MedicalProcedure", name: "Dental Implants" },
+    { "@type": "MedicalProcedure", name: "Microscope-enhanced Endodontics" },
+    { "@type": "MedicalProcedure", name: "Dental Prosthetics" },
+    { "@type": "MedicalProcedure", name: "Dental Surgery" },
+    { "@type": "MedicalProcedure", name: "Invisalign Clear Aligners" },
+    { "@type": "MedicalProcedure", name: "Digital Smile Design" },
+  ],
   sameAs: ["https://www.facebook.com/DentsspaFirstDentalSpa"],
+};
+
+const websiteEntity = {
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: "Dentsspa Dental Studio",
+  inLanguage: "en-IN",
+  publisher: { "@id": `${SITE_URL}/#clinic` },
+};
+
+const breadcrumbEntity = {
+  "@type": "BreadcrumbList",
+  "@id": `${SITE_URL}/#breadcrumb`,
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+  ],
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [clinicEntity, doctorPerson, websiteEntity, breadcrumbEntity],
 };
 
 export default function Home() {

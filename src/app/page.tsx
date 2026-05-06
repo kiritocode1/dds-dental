@@ -239,14 +239,14 @@ function Hero() {
 
       <div className="relative lg:col-span-5">
         <figure className="reveal">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-muted">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-muted sm:aspect-[4/5] lg:aspect-[5/7]">
             <Image
               src="/doctor/1.jpeg"
               alt="Dr. Priti Munde at Dentsspa Dental Studio, Pune"
               fill
               priority
               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 80vw, 100vw"
-              className="object-cover"
+              className="object-cover object-[center_top]"
             />
           </div>
           <figcaption className="mt-3 text-xs text-muted-foreground">
